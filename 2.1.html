@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Live Character Counter</title>
+
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: radial-gradient(circle at top left, #1b2a4a, #020617);
+      font-family: Arial, sans-serif;
+    }
+
+    .container {
+      position: relative;
+      width: 420px;
+    }
+
+    textarea {
+      width: 100%;
+      height: 140px;
+      padding: 16px;
+      font-size: 18px;
+      color: #e5e7eb;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      border-radius: 14px;
+      outline: none;
+      resize: none;
+      box-sizing: border-box;
+    }
+
+    textarea::placeholder {
+      color: #cbd5f5;
+    }
+
+    .counter {
+      position: absolute;
+      bottom: 10px;
+      right: 14px;
+      font-size: 16px;
+      color: #e5e7eb;
+    }
+
+    .counter.warning {
+      color: #f87171;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="container">
+    <textarea
+      id="message"
+      placeholder="Type your message..."
+      maxlength="150"
+      oninput="updateCount()"
+    ></textarea>
+
+    <div id="counter" class="counter">0/150</div>
+  </div>
+
+  <script>
+    function updateCount() {
+      const textarea = document.getElementById("message");
+      const counter = document.getElementById("counter");
+      const max = 150;
+      const length = textarea.value.length;
+
+      counter.textContent = `${length}/${max}`;
+
+      // visual warning near limit
+      if (length >= 140) {
+        counter.classList.add("warning");
+      } else {
+        counter.classList.remove("warning");
+      }
+    }
+  </script>
+
+</body>
+</html>
